@@ -29,7 +29,7 @@ struct Day create(){
 
 void read( struct Day *calendar, int numDays){
     for(int i = 0; i<numDays; i++){
-        printf("Enter the detals of the day %d\n", i+1);
+        printf("Enter the details of the day %d\n", i+1);
         calendar[i] = create();
     }
 }
@@ -48,13 +48,24 @@ void display(struct Day *calendar, int numDays){
 int main(){
     int numDays;
 
-    printf("Enter the number of the days in the calendar: %d\n", numDays);
-    scanf("%d\n", &numDays);
+    printf("Enter the number of the days in the calendar:");
+    scanf("%d", &numDays);
 
     struct Day *calendar = (struct Day *) malloc(numDays * sizeof(struct Day));
+
+    if(calendar == NULL){
+        printf("memory allocation failed exiting\n");
+        return 1;
+    }
 
     read(calendar, numDays);
     display(calendar, numDays);
 
+    for(int i = 0; i<numDays; i++){
+        free(calendar[i].name);
+        free(calendar[i].description);
+    }
+    
     free(calendar);
+    return 0;
 }
