@@ -1,37 +1,53 @@
 #include<stdio.h>
 #include<stdlib.h>
-
 #define MAXSIZE 5
 
 int s[MAXSIZE], top = -1;
 
 void push(){
     if(top == MAXSIZE - 1){
-        printf("Stack is overflow!!!\n");
-    }
-    else{
-        printf("Enter the element to be pushed: ");
-        scanf("%d", &s[++top]);
+        printf("Stack is ocverflow!!");
+        return;
+    }else{
+        printf("Enter the element which u want to insert : ");
+        scanf("%d", s[++top]);
     }
 }
 
 void pop(){
     if(top == -1){
-        printf("Stack is underflow!!!\n");
-    }
-    else{
-        printf("Popped element is: %d\n", s[top--]);
+        printf("stack is empty to delete any eleent!!!");
+        return;
+    }else{
+        printf("deleted element is : %d", s[top--]);
     }
 }
 
 void display(){
-    if(top == -1){
-        printf("Stack is empty!!!\n");
+    int t = top;
+    if(t == -1){
+        printf("stack is empty!");
+    }else{
+        printf("stack elements are : ");
+        while(t>=0){
+            printf("%d", s[t--]);
+        }
     }
-    else{
-        printf("Elements in the stack are:\n");
-        for(int i = top; i >= 0; i--){
-            printf("%d\n", s[i]);
+}
+
+void pali(){
+    int num[5], rev[5];
+    for(int i = 0, t = top; t>=0; i++, t--){
+        num[i] = rev[t] = s[t];
+        for(int i =0; top>=0; i++){
+            if(num[i]!= rev[i])
+            break;
+        }
+
+        if(i == top){
+            printf("It is a palindrome!!");
+        }else{
+            printf("It is not a palindrome!!");
         }
     }
 }
@@ -40,17 +56,23 @@ int main(){
     int ch;
 
     while(1){
-        printf("\n-------- Stack Operations --------\n");
-        printf("1. Push\n2. Pop\n3. Display\n4. Exit\n");
-        printf("Enter your choice: ");
+        printf("Stack operations!!!!!!!!!!!!!");
+        printf("1. push");
+        printf("2. pop");
+        printf("3. palindrome");
+        printf("4. display");
+        printf("5. exit");
+
+        printf("Enter the choice: ");
         scanf("%d", &ch);
 
         switch(ch){
             case 1: push(); break;
             case 2: pop(); break;
-            case 3: display(); break;
-            case 4: exit(0);
-            default: printf("Invalid choice!!!\n");
+            case 3: pali(); break;
+            case 4: display(); break;
+            case 5: exit(0);
+            default: printf("Invalid choice!!");
         }
     }
 

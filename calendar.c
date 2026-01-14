@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 
-struct Day {
+struct Day{
     char *name;
     int date;
     char *description;
@@ -12,7 +12,7 @@ struct Day create(){
     struct Day day;
     char temp[100];
 
-    printf("Enter the day of the week:");
+    printf("Enter the day of the week: ");
     scanf("%s", temp);
     day.name = strdup(temp);
 
@@ -21,40 +21,35 @@ struct Day create(){
 
     printf("Enter a description: ");
     scanf("%s", temp);
-    day.description = strdup(temp);     //strdup allocates memory and copies the string
+    day.description = strdup(temp);
 
     return day;
-
 };
 
-void read( struct Day *calendar, int numDays){
+void read(struct Day *calendar, int numDays){
     for(int i = 0; i<numDays; i++){
-        printf("Enter the details of the day %d\n", i+1);
         calendar[i] = create();
     }
 }
 
 void display(struct Day *calendar, int numDays){
-    printf("\n ---------Calendar-----\n");
-    for(int i =0; i<numDays; i++){
-        printf("Day : %s\n", calendar[i].name);
-        printf("Date : %d\n", calendar[i].date);
-        printf("Description : %s\n", calendar[i].description);
+    for(int i = 0; i<numDays; i++){
+        printf("Day: %s", calendar[i].name);
+        printf("date: %d", calendar[i].date);
+        printf("description: %s", calendar[i].description);
     }
-    printf("\n");
 }
-
 
 int main(){
     int numDays;
 
-    printf("Enter the number of the days in the calendar:");
+    printf("Enter the number of the days  in a week : ");
     scanf("%d", &numDays);
 
-    struct Day *calendar = (struct Day *) malloc(numDays * sizeof(struct Day));
+    struct Day *calendar = (struct Day*)malloc(numDays * sizeof(struct Day));
 
     if(calendar == NULL){
-        printf("memory allocation failed exiting\n");
+        printf("memory allocation is failed!!");
         return 1;
     }
 
@@ -65,7 +60,8 @@ int main(){
         free(calendar[i].name);
         free(calendar[i].description);
     }
-    
+
     free(calendar);
+
     return 0;
 }
